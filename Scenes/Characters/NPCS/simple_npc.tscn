@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://cmf0y2jbirtv8"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/NPCS/simple_npc.gd" id="1_k2cmy"]
+[ext_resource type="Texture2D" uid="uid://dgh7k83bdyj0l" path="res://Assets/Sprite Sheets/Characters/NPCS/SimpleNPC-Sheet.png" id="1_mv87s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f85ad"]
+atlas = ExtResource("1_mv87s")
+region = Rect2(0, 0, 8, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13f0s"]
+atlas = ExtResource("1_mv87s")
+region = Rect2(8, 0, 8, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ieim8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f85ad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13f0s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5mikr"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3sexj"]
+radius = 14.0089
+
+[node name="SimpleNPC" type="StaticBody2D"]
+process_mode = 3
+script = ExtResource("1_k2cmy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+process_mode = 1
+sprite_frames = SubResource("SpriteFrames_ieim8")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("CircleShape2D_5mikr")
+
+[node name="CrateCollider" type="Area2D" parent="."]
+position = Vector2(0, -0.5)
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrateCollider"]
+shape = SubResource("CircleShape2D_3sexj")
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 3
+wait_time = 3.0
+
+[connection signal="body_entered" from="CrateCollider" to="." method="_crate_entered" flags=3]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

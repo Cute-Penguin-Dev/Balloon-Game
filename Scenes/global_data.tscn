@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7a3njltb641t"]
+
+[ext_resource type="Script" path="res://Scripts/gobal_data.gd" id="1_ibtn2"]
+
+[node name="GlobalData" type="Node" groups=["Data"]]
+script = ExtResource("1_ibtn2")

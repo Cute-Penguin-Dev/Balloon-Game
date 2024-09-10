@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bik47ix6okcce"]
+
+[ext_resource type="Texture2D" uid="uid://c74wk0xhrifqy" path="res://Assets/Level Items/ChainSegment.png" id="1_ykv5e"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_561be"]
+friction = 0.5
+rough = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iyk4e"]
+radius = 2.0
+
+[node name="ChainSegment" type="RigidBody2D"]
+mass = 0.25
+physics_material_override = SubResource("PhysicsMaterial_561be")
+gravity_scale = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ykv5e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_iyk4e")

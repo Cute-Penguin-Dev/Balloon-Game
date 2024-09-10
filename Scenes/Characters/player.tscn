@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cq53vfnuhpchw"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/player.gd" id="1_3oi2d"]
+[ext_resource type="Texture2D" uid="uid://bphkjoo5uso75" path="res://Assets/Characters/Player.png" id="1_60rbe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7q76"]
+size = Vector2(6, 8)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dw3qr"]
+radius = 3.33333
+height = 8.88889
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 2
+collision_layer = 40
+script = ExtResource("1_3oi2d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_60rbe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y7q76")
+
+[node name="DangerCollider" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DangerCollider"]
+scale = Vector2(0.9, 0.9)
+shape = SubResource("CapsuleShape2D_dw3qr")
+
+[node name="FanCollider" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FanCollider"]
+scale = Vector2(0.9, 0.9)
+shape = SubResource("CapsuleShape2D_dw3qr")
+
+[connection signal="body_entered" from="DangerCollider" to="." method="_danger_collider_hit_"]
+[connection signal="body_entered" from="FanCollider" to="." method="_entered_fan_wind_"]
+[connection signal="body_exited" from="FanCollider" to="." method="_exited_fan_wind_"]

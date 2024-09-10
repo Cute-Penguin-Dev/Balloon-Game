@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=3 uid="uid://c5obnj3404wbt"]
+
+[ext_resource type="Texture2D" uid="uid://tpjqv86xu72u" path="res://Assets/Level Items/Fan.png" id="1_qm27n"]
+[ext_resource type="Script" path="res://Scripts/Level Items/fan.gd" id="1_x6ona"]
+[ext_resource type="Texture2D" uid="uid://cjfr22ot7enyt" path="res://Assets/Sprite Sheets/Level Items/FanWind-Sheet.png" id="3_alwlx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_outgm"]
+size = Vector2(4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_noxh1"]
+atlas = ExtResource("3_alwlx")
+region = Rect2(0, 0, 7, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utb2g"]
+atlas = ExtResource("3_alwlx")
+region = Rect2(7, 0, 7, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqtgl"]
+atlas = ExtResource("3_alwlx")
+region = Rect2(14, 0, 7, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1g5p"]
+atlas = ExtResource("3_alwlx")
+region = Rect2(21, 0, 7, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m66y4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_noxh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_utb2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqtgl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s1g5p")
+}],
+"loop": true,
+"name": &"blow",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8e53c"]
+size = Vector2(7.5, 48)
+
+[node name="Fan" type="StaticBody2D"]
+z_index = 1
+script = ExtResource("1_x6ona")
+blow_velo = Vector2(0, -50)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qm27n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_outgm")
+
+[node name="BlowZone" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BlowZone"]
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_m66y4")
+animation = &"blow"
+autoplay = "blow"
+frame = 2
+frame_progress = 0.114912
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlowZone"]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_8e53c")
+
+[node name="BlowZoneCollider" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlowZoneCollider"]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_8e53c")
+
+[connection signal="body_entered" from="BlowZoneCollider" to="." method="_on_player_entered"]

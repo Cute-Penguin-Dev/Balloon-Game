@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b67lqmb52snbo"]
+
+[ext_resource type="Texture2D" uid="uid://2sqgpa8slswy" path="res://Assets/Level Items/Crate.png" id="1_xyakj"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a8ltv"]
+friction = 0.5
+rough = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qcocx"]
+size = Vector2(8, 8)
+
+[node name="Crate" type="RigidBody2D"]
+z_index = 1
+collision_layer = 64
+collision_mask = 33
+mass = 0.25
+physics_material_override = SubResource("PhysicsMaterial_a8ltv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xyakj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qcocx")
