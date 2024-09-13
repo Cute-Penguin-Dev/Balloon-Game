@@ -468,7 +468,7 @@ node_b = NodePath("../../Crate")
 
 [node name="SimpleNPC" parent="." instance=ExtResource("9_hs1ks")]
 position = Vector2(-187, -1244)
-next_level_number = 1
+next_level_number = 5
 
 [node name="NPC UI" parent="." instance=ExtResource("10_tdwq3")]
 
