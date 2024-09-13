@@ -2,7 +2,6 @@ extends RigidBody2D
 
 @export var move_up_down: bool
 
-
 func _ready() -> void:
 	linear_damp = 0
 
