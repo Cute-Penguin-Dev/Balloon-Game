@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func _crate_entered(body: Node2D) -> void:
 	get_tree().paused = true
-	timer.start()
+	timer.start(0.01)
 	npc_ui.visible = true
 
 
